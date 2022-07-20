@@ -47,4 +47,5 @@ app.post("/create-payment-intent", async (req, res) => {
   });
 });
 
+app.get("/", (req, res) => res.send("Hello Server!"));
 app.listen(port, () => console.log("Node server listening on port 4242!"));

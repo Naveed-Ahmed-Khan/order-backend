@@ -1,14 +1,13 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
 
 // This is your test secret API key.
-const stripe = require("stripe")(
-  "sk_test_51LMtfiCruvk9OWrHU65M9yuGtrzoExsk6niAl0YRBKkxCP6PCSOcaEqbnc1UYINPkbCbxRqqZ3mjArNFdpZOsBgU00v4JVcqp3"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
 const port = process.env.PORT || 5000;
 
-app.use(express.static("public"));
 app.use(express.json());
 app.use(cors());
 
@@ -19,7 +18,6 @@ const subscriptionPlans = [
 ];
 
 const calculateOrderAmount = (items) => {
-  // Replace this constant with a calculation of the order's amount
   // Calculate the order total on the server to prevent
   // people from directly manipulating the amount on the client
   const selectedPlan = subscriptionPlans.filter(
@@ -48,4 +46,4 @@ app.post("/create-payment-intent", async (req, res) => {
 });
 
 app.get("/", (req, res) => res.send("Hello Server!"));
-app.listen(port, () => console.log("Node server listening on port 4242!"));
+app.listen(port, () => console.log("Node server listening on port 5000!"));
